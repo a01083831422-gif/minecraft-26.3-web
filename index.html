@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft 26.3 Web - WebAssembly Client</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #game-container {
+            width: 900px;
+            max-width: 95vw;
+            background: #252525;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+        }
+        #header {
+            background: #333333;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #444;
+        }
+        #header h1 {
+            font-size: 1.25rem;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .badge {
+            background: #555;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #ffeb3b;
+        }
+        #screen {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        #overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.92);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            gap: 20px;
+            z-index: 10;
+        }
+        .progress-box {
+            width: 80%;
+            background: #222;
+            border-radius: 6px;
+            border: 1px solid #444;
+            padding: 4px;
+        }
+        .progress-bar {
+            height: 18px;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        #modules-status {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            width: 80%;
+            font-size: 0.85rem;
+        }
+        .mod-item {
+            background: #1e1e1e;
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid #333;
+        }
+        .mod-item.loaded {
+            border-color: #4CAF50;
+            color: #a5d6a7;
+        }
+        #console-log {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.8rem;
+            background: #141414;
+            color: #ddd;
+            height: 120px;
+            overflow-y: auto;
+            padding: 10px 15px;
+            border-top: 1px solid #333;
+        }
+        .log-entry {
+            margin-bottom: 3px;
+        }
+        .log-entry.ok { color: #81c784; }
+        .log-entry.info { color: #64b5f6; }
+        .log-entry.warn { color: #ffb74d; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="header">
+            <h1>Minecraft 26.3 Web <span class="badge">WASM Modular</span></h1>
+            <span id="version-label" style="font-size: 0.85rem; color: #aaa;">Version 26.3 (Java 25 Bytecode)</span>
+        </div>
+
+        <div id="screen">
+            <canvas id="mc-canvas"></canvas>
+            <div id="overlay">
+                <h2 style="color: #fff;">Chargement des Modules WebAssembly</h2>
+                <div class="progress-box">
+                    <div id="main-progress" class="progress-bar"></div>
+                </div>
+                <div id="progress-text" style="font-size: 0.9rem; color: #bbb;">Initialisation du runtime...</div>
+                <div id="modules-status"></div>
+            </div>
+        </div>
+
+        <div id="console-log"></div>
+    </div>
+
+    <script src="wasm-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+[
+  {
+    "file": "minecraft-world.wasm",
+    "sizeMB": 6.29,
+    "bytes": 6591798,
+    "valid": true
+  },
+  {
+    "file": "minecraft-client.wasm",
+    "sizeMB": 3.63,
+    "bytes": 3807339,
+    "valid": true
+  },
+  {
+    "file": "minecraft-server.wasm",
+    "sizeMB": 1.15,
+    "bytes": 1208749,
+    "valid": true
+  },
+  {
+    "file": "minecraft-network.wasm",
+    "sizeMB": 0.51,
+    "bytes": 537215,
+    "valid": true
+  },
+  {
+    "file": "minecraft-core.wasm",
+    "sizeMB": 2.28,
+    "bytes": 2392625,
+    "valid": true
+  },
+  {
+    "file": "minecraft-mojang.wasm",
+    "sizeMB": 0.79,
+    "bytes": 824615,
+    "valid": true
+  },
+  {
+    "file": "minecraft-assets.wasm",
+    "sizeMB": 2.24,
+    "bytes": 2347459,
+    "valid": true
+  },
+  {
+    "file": "minecraft-data.wasm",
+    "sizeMB": 2.92,
+    "bytes": 3060104,
+    "valid": true
+  }
+]
